@@ -8,9 +8,20 @@ const User = conn.define('user',{
 
 const syncAndSeed = () =>{
     conn.sync({force:true})   
-        .then((conn)=>{
-            console.log(conn);
+        .then(()=>{
+            User.create({
+                firstName: 'John',
+                lastName: 'Eric',
+            });
+            User.create({
+                firstName: 'Mike',
+                lastName: 'Bibby',
+            })
         })
 }
 
-syncAndSeed()
+
+module.exports = { 
+    User,
+    syncAndSeed,
+}

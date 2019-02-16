@@ -1,0 +1,24 @@
+
+
+<html>
+    <head>
+        <title>
+
+        </title>
+    </head>
+    <body>
+        <h1>
+                Acme Users CRUD-SEQ
+        </h1>
+        <ul>
+            <%= users.map((user)=>{
+                return user.firstName
+            })
+            -%>
+        </ul>
+        <form method='post' action='/users/user.id'>
+            <button>Create</button>
+        </form>
+        
+    </body>
+</html>
