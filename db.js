@@ -8,16 +8,16 @@ const User = conn.define('user',{
 
 const syncAndSeed = () =>{
     conn.sync({force:true})   
-        .then(()=>{
-            User.create({
-                firstName: 'John',
-                lastName: 'Eric',
-            });
-            User.create({
-                firstName: 'Mike',
-                lastName: 'Bibby',
-            })
-        })
+        // .then(()=>{
+        //     User.create({
+        //         firstName: 'John',
+        //         lastName: 'Eric',
+        //     });
+        //     User.create({
+        //         firstName: 'Mike',
+        //         lastName: 'Bibby',
+        //     })
+        // })
 }
 
 

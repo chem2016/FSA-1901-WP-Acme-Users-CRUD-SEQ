@@ -21,9 +21,16 @@ app.get('/',(req, res, next)=>{
 
 app.get('/users',(req, res, next)=>{
     User.findAll()
-        .then((users)=> res.send(renderPage(users)))
+        .then((users)=> res.send(renderPage(users, req.params.id)))
         .catch(next);
 })
+
+app.get('/users/:id',(req, res, next)=>{
+    User.findAll()
+        .then((users)=>res.send(renderPage(users, req.params.id)))
+        .catch(next)
+})
+
 
 app.post('/users/:id',  (req, res, next)=>{
     //console.log('------------debug-----------')
@@ -46,6 +53,38 @@ app.delete('/users/:id', (req, res, next)=>{
         }
     })
     .then(()=>res.redirect('/users'))
+    .catch(next)
+})
+
+app.put('/users/:id',(req, res, next)=>{
+    
+    User.update({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+    },{
+        where: {id: req.params.id}
+    })
+    .then(validationId =>{
+        if(validationId[0]){
+            res.redirect('/users')
+        }else{
+            res.send(`
+                <!DOCTYPE html>
+                <html>
+                    <body>
+                        <h1>
+                        Acme Users Seq CRUD
+                        </h1>
+                        <p>
+                        Cannot read property update of 'null'.
+                        <a href="/users"> try again</a>
+                        </p>
+                    </body>
+                </html>
+            
+            `)
+        }
+    })
     .catch(next)
 })
 
